@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectCaseController;
 use App\Http\Controllers\StepController;
+use App\Http\Controllers\EnvironmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,15 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('projects/{project}')->group(function () {
         Route::get('cases', [ProjectCaseController::class, 'index']);
         Route::post('cases', [ProjectCaseController::class, 'store']);
+
+        Route::get('environments', [EnvironmentController::class, 'index']);
+        Route::post('environments', [EnvironmentController::class, 'store']);
+    });
+
+    Route::prefix('environments/{environment}')->group(function () {
+        Route::get('', [StepController::class, 'show']);
+        Route::post('', [StepController::class, 'update']);
+        Route::delete('', [StepController::class, 'destroy']);
     });
 
     Route::prefix('cases/{projectCase}')->group(function () {
