@@ -13,7 +13,9 @@ class ProjectController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        return ProjectResource::collection(Project::all());
+        $projects = Project::withCount('cases')->get();
+
+        return ProjectResource::collection($projects);
     }
 
     public function store(StoreProjectRequest $request): ProjectResource
@@ -25,6 +27,8 @@ class ProjectController extends Controller
 
     public function show(Project $project): ProjectResource
     {
+        $project->load('cases');
+
         return ProjectResource::make($project);
     }
 

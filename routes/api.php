@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectCaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,15 @@ Route::group([
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('projects', ProjectController::class);
+
+    Route::prefix('projects/{project}')->group(function () {
+        Route::get('cases', [ProjectCaseController::class, 'index']);
+        Route::post('cases', [ProjectCaseController::class, 'store']);
+    });
+
+    Route::prefix('cases/{projectCase}')->group(function () {
+        Route::get('/', [ProjectCaseController::class, 'show']);
+        Route::put('/', [ProjectCaseController::class, 'update']);
+        Route::delete('/', [ProjectCaseController::class, 'destroy']);
+    });
 });
