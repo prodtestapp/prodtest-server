@@ -14,6 +14,7 @@ class Step extends Model
     protected $fillable = [
         'name',
         'key',
+        'method',
         'url',
         'headers',
         'body_type',
