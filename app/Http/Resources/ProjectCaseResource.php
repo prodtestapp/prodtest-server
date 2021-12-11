@@ -17,6 +17,7 @@ class ProjectCaseResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'order_no' => $this->order_no,
+            'steps_count' => $this->when(isset($this->steps_count), $this->steps_count),
             'project_id' => $this->project_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

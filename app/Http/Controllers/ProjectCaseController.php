@@ -14,7 +14,7 @@ class ProjectCaseController extends Controller
 {
     public function index(Project $project): AnonymousResourceCollection
     {
-        $cases = $project->cases()->orderBy('order_no')->get();
+        $cases = $project->cases()->withCount('steps')->orderBy('order_no')->get();
 
         return ProjectCaseResource::collection($cases);
     }
