@@ -13,6 +13,7 @@ class Project extends Model
 
     protected $fillable = [
         'name',
+        'background_color',
     ];
 
     public function cases(): HasMany

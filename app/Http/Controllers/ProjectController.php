@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProjectBackgroundColor;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
@@ -13,14 +14,21 @@ class ProjectController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        $projects = Project::withCount('cases')->get();
+        $projects = Project::withCount('cases')->orderBy('created_at')->get();
 
         return ProjectResource::collection($projects);
     }
 
     public function store(StoreProjectRequest $request): ProjectResource
     {
-        $project = Project::create($request->validated());
+        $project = Project::create(
+            array_merge(
+                $request->validated(),
+                [
+                    'background_color' => ProjectBackgroundColor::getValues()[rand(0, ProjectBackgroundColor::getValuesCount() - 1)],
+                ]
+            )
+        );
 
         return ProjectResource::make($project);
     }
