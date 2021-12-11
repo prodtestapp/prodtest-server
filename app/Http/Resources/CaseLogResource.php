@@ -22,6 +22,8 @@ class CaseLogResource extends JsonResource
             'project' => $this->whenLoaded('project'),
             'case' => $this->whenLoaded('case'),
             'failed_step' => $this->whenLoaded('failedStep'),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

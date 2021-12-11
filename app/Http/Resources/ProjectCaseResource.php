@@ -18,6 +18,7 @@ class ProjectCaseResource extends JsonResource
             'name' => $this->name,
             'order_no' => $this->order_no,
             'steps_count' => $this->steps_count ?? 0,
+            'latest_log' => CaseLogResource::make($this->whenLoaded('latestLog')),
             'project_id' => $this->project_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
