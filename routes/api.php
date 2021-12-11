@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectCaseController;
+use App\Http\Controllers\StepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,8 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/', [ProjectCaseController::class, 'show']);
         Route::put('/', [ProjectCaseController::class, 'update']);
         Route::delete('/', [ProjectCaseController::class, 'destroy']);
+
+        Route::get('/steps', [StepController::class, 'index']);
+        Route::post('/steps', [StepController::class, 'store']);
     });
 });
