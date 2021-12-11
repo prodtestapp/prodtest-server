@@ -12,7 +12,7 @@ class CaseLogController extends Controller
 {
     public function index(ProjectCase $projectCase): AnonymousResourceCollection
     {
-        $caseLogs = $projectCase->logs;
+        $caseLogs = $projectCase->logs()->orderByDesc('created_at')->get();
 
         return CaseLogResource::collection($caseLogs);
     }
