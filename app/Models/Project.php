@@ -20,4 +20,9 @@ class Project extends Model
     {
         return $this->hasMany(ProjectCase::class);
     }
+
+    public function environments(): HasMany
+    {
+        return $this->hasMany(Environment::class);
+    }
 }
