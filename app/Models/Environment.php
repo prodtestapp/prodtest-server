@@ -12,8 +12,12 @@ class Environment extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'key',
-        'value',
+        'name',
+        'data',
+    ];
+
+    protected $casts = [
+        'data' => 'object',
     ];
 
     public function project(): BelongsTo

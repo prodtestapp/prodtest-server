@@ -14,8 +14,8 @@ class StoreEnvironmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => ['required', 'string', 'max:255'],
-            'value' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'data' => ['required', 'json', 'max:255'],
         ];
     }
 }

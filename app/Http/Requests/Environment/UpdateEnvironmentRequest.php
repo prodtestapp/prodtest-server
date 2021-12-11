@@ -14,8 +14,8 @@ class UpdateEnvironmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => ['nullable', 'string', 'max:255'],
-            'value' => ['nullable', 'string', 'max:255'],
+            'name' => ['nullable', 'string', 'max:255'],
+            'data' => ['nullable', 'json', 'max:255'],
         ];
     }
 }
