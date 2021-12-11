@@ -42,9 +42,12 @@ class ProjectController extends Controller
 
     public function show(Project $project): ProjectResource
     {
-        $project->load(['cases' => function ($query) {
-            $query->orderBy('order_no');
-        }]);
+        $project->load([
+            'cases' => function ($query) {
+                $query->orderBy('order_no');
+            },
+            'cases.latestLog'
+        ]);
 
         $project->loadCount('cases');
 
