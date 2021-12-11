@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -13,19 +12,48 @@ class AuthController extends Controller
      * @param LoginRequest $request
      * @return JsonResponse
      */
-    public function login(LoginRequest $request)
+    public function login(LoginRequest $request): JsonResponse
     {
-        if (!Auth::attempt($request->only(['email', 'password']))) {
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+        if (!$token = auth()->attempt($request->validated())) {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
+        return $this->createNewToken($token);
+    }
 
-        $user = User::where('email', $request->email)->firstOrFail();
+    public function me()
+    {
+        return \auth()->user();
+    }
 
+    /**
+     * @return Response
+     */
+    public function logout(): Response
+    {
+        auth()->logout();
+
+        return response()->noContent();
+    }
+
+    /**
+     * @return JsonResponse
+     */
+    public function refresh(): JsonResponse
+    {
+        return $this->createNewToken(auth()->refresh());
+    }
+
+    /**
+     * @param $token
+     * @return JsonResponse
+     */
+    private function createNewToken($token): JsonResponse
+    {
         return response()->json([
-            'user' => $user,
-            'token' => $user->createToken('auth_token')->plainTextToken
+            'token' => $token,
+            'token_type' => 'Bearer',
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user(),
         ]);
     }
 }
