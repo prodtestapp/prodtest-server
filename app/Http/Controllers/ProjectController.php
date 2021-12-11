@@ -34,7 +34,7 @@ class ProjectController extends Controller
             'name' => 'Default',
         ]);
 
-        $project->load('environment');
+        $project->load('environments');
         $project->loadCount('cases');
 
         return ProjectResource::make($project);
