@@ -31,6 +31,11 @@ class ProjectController extends Controller
             )
         );
 
+        $project->environments()->create([
+            'name' => 'Default',
+        ]);
+
+        $project->load('environment');
         $project->loadCount('cases');
 
         return ProjectResource::make($project);
