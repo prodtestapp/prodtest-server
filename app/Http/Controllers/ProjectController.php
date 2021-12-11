@@ -7,6 +7,7 @@ use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
@@ -37,7 +38,10 @@ class ProjectController extends Controller
 
     public function show(Project $project): ProjectResource
     {
-        $project->load('cases');
+        $project->load(['cases' => function ($query) {
+            $query->orderBy('order_no');
+        }]);
+
         $project->loadCount('cases');
 
         return ProjectResource::make($project);
