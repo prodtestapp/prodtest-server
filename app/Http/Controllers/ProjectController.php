@@ -30,12 +30,15 @@ class ProjectController extends Controller
             )
         );
 
+        $project->loadCount('cases');
+
         return ProjectResource::make($project);
     }
 
     public function show(Project $project): ProjectResource
     {
         $project->load('cases');
+        $project->loadCount('cases');
 
         return ProjectResource::make($project);
     }
@@ -43,6 +46,8 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project): ProjectResource
     {
         $project->update($request->validated());
+
+        $project->loadCount('cases');
 
         return ProjectResource::make($project);
     }
