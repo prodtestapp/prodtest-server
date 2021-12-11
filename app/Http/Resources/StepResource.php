@@ -16,6 +16,7 @@ class StepResource extends JsonResource
         return [
             'id' => $this->id,
             'project_case_id' => $this->project_case_id,
+            'key' => $this->key,
             'name' => $this->name,
             'url' => $this->url,
             'method' => $this->method,
@@ -25,6 +26,8 @@ class StepResource extends JsonResource
             'expected_status' => $this->expected_status,
             'use_validator' => $this->use_validator,
             'validator_schema' => $this->validator_schema,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
