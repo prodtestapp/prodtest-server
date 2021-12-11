@@ -43,9 +43,9 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::prefix('environments/{environment}')->group(function () {
-        Route::get('', [StepController::class, 'show']);
-        Route::post('', [StepController::class, 'update']);
-        Route::delete('', [StepController::class, 'destroy']);
+        Route::get('', [EnvironmentController::class, 'show']);
+        Route::post('', [EnvironmentController::class, 'update']);
+        Route::delete('', [EnvironmentController::class, 'destroy']);
     });
 
     Route::prefix('cases/{projectCase}')->group(function () {
