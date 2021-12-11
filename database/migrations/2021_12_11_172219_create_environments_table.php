@@ -16,8 +16,8 @@ class CreateEnvironmentsTable extends Migration
         Schema::create('environments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('project_id');
-            $table->string('key');
-            $table->string('value');
+            $table->string('name');
+            $table->json('data')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
