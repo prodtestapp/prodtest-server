@@ -2,18 +2,29 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StepResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'project_case_id' => $this->project_case_id,
+            'name' => $this->name,
+            'url' => $this->url,
+            'method' => $this->method,
+            'headers' => $this->headers,
+            'body_type' => $this->body_type,
+            'body' => $this->body,
+            'expected_status' => $this->expected_status,
+            'use_validator' => $this->use_validator,
+            'validator_schema' => $this->validator_schema,
+        ];
     }
 }
