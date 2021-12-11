@@ -5,20 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProjectCase extends Model
+class CaseLog extends Model
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'name',
-        'order_no',
+        'project_case_id',
+        'project_id',
+        'failed_step_id',
+        'status',
     ];
 
     protected $casts = [
-        'order_no' => 'integer',
+        'status' => 'boolean',
     ];
 
     public function project(): BelongsTo
@@ -26,13 +27,13 @@ class ProjectCase extends Model
         return $this->belongsTo(Project::class);
     }
 
-    public function steps(): HasMany
+    public function case(): BelongsTo
     {
-        return $this->hasMany(Step::class);
+        return $this->belongsTo(ProjectCase::class);
     }
 
-    public function logs(): HasMany
+    public function failedStep(): BelongsTo
     {
-        return $this->hasMany(CaseLog::class, 'project_case_id');
+        return $this->belongsTo(Step::class, 'failed_step_id');
     }
 }
