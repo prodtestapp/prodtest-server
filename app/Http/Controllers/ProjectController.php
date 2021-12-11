@@ -7,7 +7,6 @@ use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
@@ -15,7 +14,7 @@ class ProjectController extends Controller
 {
     public function index(): AnonymousResourceCollection
     {
-        $projects = Project::withCount('cases')->orderBy('created_at')->get();
+        $projects = Project::withCount('cases')->with('latestLog')->orderBy('created_at')->get();
 
         return ProjectResource::collection($projects);
     }

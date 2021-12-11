@@ -19,6 +19,7 @@ class ProjectResource extends JsonResource
             'background_color' => $this->background_color,
             'cases' => ProjectCaseResource::collection($this->whenLoaded('cases')),
             'environments' => EnvironmentResource::collection($this->whenLoaded('environments')),
+            'latest_log' => CaseLogResource::make($this->whenLoaded('latest_log')),
             'cases_count' => $this->when(isset($this->cases_count), $this->cases_count),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
