@@ -9,13 +9,12 @@ use App\Models\Project;
 use App\Models\ProjectCase;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 
 class ProjectCaseController extends Controller
 {
     public function index(Project $project): AnonymousResourceCollection
     {
-        $cases = $project->cases;
+        $cases = $project->cases()->orderBy('order_no')->get();
 
         return ProjectCaseResource::collection($cases);
     }
