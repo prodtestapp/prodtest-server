@@ -29,7 +29,7 @@ class CaseLog extends Model
 
     public function case(): BelongsTo
     {
-        return $this->belongsTo(ProjectCase::class);
+        return $this->belongsTo(ProjectCase::class, 'project_case_id');
     }
 
     public function failedStep(): BelongsTo

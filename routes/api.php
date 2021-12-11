@@ -57,8 +57,8 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/steps', [StepController::class, 'index']);
         Route::post('/steps', [StepController::class, 'store']);
 
-        Route::get('/logs', [CaseLogController::class, 'index']);
-        Route::post('/logs', [CaseLogController::class, 'store']);
+        Route::get('/case-logs', [CaseLogController::class, 'index']);
+        Route::post('/case-logs', [CaseLogController::class, 'store']);
     });
 
     Route::get('case-logs/{caseLog}', [CaseLogController::class, 'show']);
