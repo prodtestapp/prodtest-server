@@ -31,6 +31,7 @@ class ProjectCaseController extends Controller
     public function show(ProjectCase $projectCase): ProjectCaseResource
     {
         $projectCase->load('project');
+        $projectCase->loadCount('steps');
 
         return ProjectCaseResource::make($projectCase);
     }
