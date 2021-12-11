@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "guvercinler/prodtest",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Prodtest Server is the core backend infrastructure for Prodtest platform.",
+    "keywords": ["api"],
     "license": "MIT",
     "require": {
         "php": "^8.0",
