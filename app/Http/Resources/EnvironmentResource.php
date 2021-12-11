@@ -15,8 +15,8 @@ class EnvironmentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'key' => $this->key,
-            'value' => $this->value,
+            'name' => $this->name,
+            'data' => $this->data,
         ];
     }
 }
