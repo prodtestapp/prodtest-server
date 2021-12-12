@@ -69,5 +69,13 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/case-logs', [CaseLogController::class, 'store']);
     });
 
+    Route::prefix('steps/{step}')->group(function () {
+        Route::get('/', [StepController::class, 'show']);
+        Route::put('/', [StepController::class, 'update']);
+        Route::delete('/', [StepController::class, 'destroy']);
+
+        Route::get('change-order', [StepController::class, 'changeOrder']);
+    });
+
     Route::get('case-logs/{caseLog}', [CaseLogController::class, 'show']);
 });
