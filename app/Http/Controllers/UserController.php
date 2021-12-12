@@ -16,7 +16,14 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request): UserResource
     {
-        $user = User::create(array_merge($request->validated(), ['password' => bcrypt('password')]));
+        $user = User::create(
+            array_merge(
+                $request->only('full_name', 'email'),
+                [
+                    'password' => bcrypt($request->password),
+                ]
+            )
+        );
 
         return UserResource::make($user);
     }
