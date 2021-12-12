@@ -9,6 +9,13 @@ Client projesi için: [ProdTest Web Client](https://github.com/prodtestapp/prodt
 ## Postman Collection
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7250997-ede35c70-84a8-49bb-8f94-ea686c2735d3?action=collection%2Ffork&collection-url=entityId%3D7250997-ede35c70-84a8-49bb-8f94-ea686c2735d3%26entityType%3Dcollection%26workspaceId%3D4353756b-3862-4939-8f98-647b4c4093fa)
 
+## Demo Kullanıcı
+
+```bash
+    email: teknasyon@teknasyon.com
+    password: teknasyon123
+```
+
 ## Kurulum
 
 Composer yardımıyla kurulum:
