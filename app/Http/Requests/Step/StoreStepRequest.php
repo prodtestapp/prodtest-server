@@ -16,22 +16,22 @@ class StoreStepRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'url' => ['required', 'url', 'max:255'],
+            'url' => ['required', 'max:255'],
             'method' => [
                 'required',
                 'string',
                 'max:255',
                 Rule::in(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
             ],
-            'headers' => ['nullable', 'json'],
+            'headers' => ['nullable', 'string'],
             'body_type' => [
                 'nullable',
                 Rule::in(['json', 'raw', 'html', 'xml']),
             ],
-            'body' => ['nullable', 'json'],
+            'body' => ['nullable', 'string'],
             'expected_status' => ['nullable', 'string'],
             'use_validator' => ['nullable', 'boolean'],
-            'validator_schema' => ['nullable', 'json'],
+            'validator_schema' => ['nullable', 'string'],
         ];
     }
 }
