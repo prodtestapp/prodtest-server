@@ -1,45 +1,9 @@
-version: '3'
+version: '3.3'
+
 services:
-    #PHP Service
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-        image: digitalocean.com/php
-        container_name: app
-        restart: unless-stopped
-        tty: true
-        environment:
-            SERVICE_NAME: app
-            SERVICE_TAGS: dev
-        working_dir: /var/www
-        volumes:
-            - ./:/var/www
-            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-        networks:
-            - app-network
-
-    #Nginx Service
-    webserver:
-        image: nginx:alpine
-        container_name: webserver
-        restart: unless-stopped
-        tty: true
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ./:/var/www
-            - ./nginx/conf.d/:/etc/nginx/conf.d/
-        networks:
-            - app-network
-
-    #Postgres Service
-    db:
+    postgres:
         image: postgres:12.5-alpine
-        container_name: db
-        restart: unless-stopped
-        tty: true
+        restart: on-failure
         ports:
             - '5431:5432'
         expose:
@@ -51,14 +15,6 @@ services:
             - POSTGRES_PASSWORD=runner
         volumes:
             - pg-data-v:/var/lib/postgresql/data/prodtest
-        networks:
-            - app-network
 
-#Docker Networks
-networks:
-    app-network:
-        driver: bridge
-#Volumes
 volumes:
-    dbdata:
-        driver: local
+    pg-data-v:
