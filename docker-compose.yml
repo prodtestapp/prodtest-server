@@ -1,20 +1,62 @@
-version: '3.3'
-
+version: '3'
 services:
-    postgres:
-        image: postgres:12.5-alpine
-        restart: on-failure
-        ports:
-            - '5431:5432'
-        expose:
-            - '5432'
+    #PHP Service
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: app
+        restart: unless-stopped
+        tty: true
         environment:
-            - PGDATA=/var/lib/postgresql/data/prodtest/
-            - POSTGRES_DB=prodtest
-            - POSTGRES_USER=runner
-            - POSTGRES_PASSWORD=runner
+            SERVICE_NAME: app
+            SERVICE_TAGS: prod
+        working_dir: /var/www
+        networks:
+            - app-network
         volumes:
-            - pg-data-v:/var/lib/postgresql/data/prodtest
+            - ./:/var/www
+            - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+
+    #Nginx Service
+    webserver:
+        image: nginx:alpine
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app-network
+        volumes:
+            - ./:/var/www
+            - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+
+    #MySQL Service
+    db:
+        image: mariadb:10.7.1
+        container_name: db
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: prodtest
+            MYSQL_ROOT_PASSWORD: root
+            SERVICE_TAGS: prod
+            SERVICE_NAME: mysql
+        networks:
+            - app-network
+        volumes:
+            - dbdata:/var/lib/mysql
+            - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
+
+#Docker Networks
+networks:
+    app-network:
+        driver: bridge
 
 volumes:
-    pg-data-v:
+    dbdata:
+        driver: local
