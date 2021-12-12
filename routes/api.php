@@ -8,6 +8,7 @@ use App\Http\Controllers\StepController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\CaseLogController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('projects', ProjectController::class);
 
     Route::put('account', [AccountController::class, 'update']);
+
+    Route::get('users', [UserController::class, 'index']);
+    Route::post('users', [UserController::class, 'store']);
 
     Route::prefix('projects/{project}')->group(function () {
         Route::get('cases', [ProjectCaseController::class, 'index']);
