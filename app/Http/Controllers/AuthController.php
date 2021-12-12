@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
@@ -42,6 +43,15 @@ class AuthController extends Controller
     public function refresh(): JsonResponse
     {
         return $this->createNewToken(auth()->refresh());
+    }
+
+    public function changePassword(ChangePasswordRequest $request): UserResource
+    {
+        auth()->user()->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        return UserResource::make(auth()->user());
     }
 
     /**
