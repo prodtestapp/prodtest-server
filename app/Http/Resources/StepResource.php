@@ -26,6 +26,7 @@ class StepResource extends JsonResource
             'expected_status' => $this->expected_status,
             'use_validator' => $this->use_validator,
             'validator_schema' => $this->validator_schema,
+            'order_no' => $this->order_no,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

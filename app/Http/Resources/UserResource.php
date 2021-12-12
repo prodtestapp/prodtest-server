@@ -5,9 +5,11 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProjectCaseResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
+     * Transform the resource into an array.
+     *
      * @param Request $request
      * @return array
      */
@@ -15,12 +17,9 @@ class ProjectCaseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'order_no' => $this->order_no,
-            'steps_count' => $this->steps_count ?? 0,
-            'project' => ProjectResource::make($this->whenLoaded('project')),
-            'latest_log' => CaseLogResource::make($this->whenLoaded('latestLog')),
-            'project_id' => $this->project_id,
+            'full_name' => $this->full_name,
+            'email' => $this->email,
+            'email_verified_at' => $this->email_verified_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

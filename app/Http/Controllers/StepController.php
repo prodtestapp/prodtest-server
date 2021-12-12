@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Step\StoreStepRequest;
 use App\Http\Requests\Step\UpdateStepRequest;
+use App\Http\Requests\UpdateStepOrderRequest;
 use App\Http\Resources\StepResource;
 use App\Models\ProjectCase;
 use App\Models\Step;
@@ -43,5 +44,24 @@ class StepController extends Controller
         $step->delete();
 
         return response()->noContent();
+    }
+
+    public function changeOrder(UpdateStepOrderRequest $request, Step $step): StepResource
+    {
+        if ($request->order_no < $step->order_no) {
+            Step::where('project_case_id', $step->project_case_id)
+                ->where('order_no', '>=', $request->order_no)
+                ->where('order_no', '<', $step->order_no)
+                ->increment('order_no');
+        } else {
+            Step::where('project_case_id', $step->project_case_id)
+                ->where('order_no', '>', $step->order_no)
+                ->where('order_no', '<=', $request->order_no)
+                ->decrement('order_no');
+        }
+
+        $step->update(['order_no' => $request->order_no]);
+
+        return StepResource::make($step);
     }
 }

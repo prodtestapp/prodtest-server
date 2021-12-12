@@ -22,6 +22,7 @@ class Step extends Model
         'expected_status',
         'use_validator',
         'validator_schema',
+        'order_no',
     ];
 
     protected $casts = [
