@@ -1,20 +1,20 @@
 version: '3.3'
 
 services:
-  postgres:
-    image: postgres:12.5-alpine
-    restart: on-failure
-    ports:
-      - '5431:5432'
-    expose:
-      - '5432'
-    environment:
-      - PGDATA=/var/lib/postgresql/data/prodtest/
-      - POSTGRES_DB=prodtest
-      - POSTGRES_USER=runner
-      - POSTGRES_PASSWORD=runner
-    volumes:
-      - pg-data-v:/var/lib/postgresql/data/prodtest
+    postgres:
+        image: postgres:12.5-alpine
+        restart: on-failure
+        ports:
+            - '5431:5432'
+        expose:
+            - '5432'
+        environment:
+            - PGDATA=/var/lib/postgresql/data/prodtest/
+            - POSTGRES_DB=prodtest
+            - POSTGRES_USER=runner
+            - POSTGRES_PASSWORD=runner
+        volumes:
+            - pg-data-v:/var/lib/postgresql/data/prodtest
 
 volumes:
-  pg-data-v:
+    pg-data-v:

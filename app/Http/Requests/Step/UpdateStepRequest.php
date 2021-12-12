@@ -16,22 +16,22 @@ class UpdateStepRequest extends FormRequest
     {
         return [
             'name' => ['nullable', 'string', 'max:255'],
-            'url' => ['nullable', 'url', 'max:255'],
+            'url' => ['nullable', 'max:255'],
             'method' => [
                 'nullable',
                 'string',
                 'max:255',
                 Rule::in(['GET', 'POST', 'PUT', 'PATCH', 'DELETE'])
             ],
-            'headers' => ['nullable', 'json'],
+            'headers' => ['nullable', 'string'],
             'body_type' => [
                 'nullable',
                 Rule::in(['json', 'raw', 'html', 'xml']),
             ],
-            'body' => ['nullable', 'json'],
+            'body' => ['nullable', 'string'],
             'expected_status' => ['nullable', 'string'],
             'use_validator' => ['nullable', 'boolean'],
-            'validator_schema' => ['nullable', 'json'],
+            'validator_schema' => ['nullable', 'string'],
         ];
     }
 }
