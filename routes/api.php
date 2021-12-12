@@ -7,6 +7,7 @@ use App\Http\Controllers\ProjectCaseController;
 use App\Http\Controllers\StepController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\CaseLogController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,8 @@ Route::group([
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('projects', ProjectController::class);
+
+    Route::put('account', [AccountController::class, 'update']);
 
     Route::prefix('projects/{project}')->group(function () {
         Route::get('cases', [ProjectCaseController::class, 'index']);

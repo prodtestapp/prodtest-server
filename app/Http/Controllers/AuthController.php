@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
@@ -20,9 +21,9 @@ class AuthController extends Controller
         return $this->createNewToken($token);
     }
 
-    public function me()
+    public function me(): UserResource
     {
-        return \auth()->user();
+        return UserResource::make(auth()->user());
     }
 
     /**
@@ -53,7 +54,7 @@ class AuthController extends Controller
             'token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user(),
+            'user' => UserResource::make(auth()->user()),
         ]);
     }
 }
