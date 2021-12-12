@@ -44,7 +44,7 @@ class ProjectController extends Controller
     {
         $project->load([
             'cases' => function ($query) {
-                $query->orderBy('order_no');
+                $query->orderBy('order_no')->withCount('steps');
             },
             'cases.latestLog'
         ]);
