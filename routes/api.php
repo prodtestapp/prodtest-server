@@ -74,7 +74,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/', [StepController::class, 'update']);
         Route::delete('/', [StepController::class, 'destroy']);
 
-        Route::get('change-order', [StepController::class, 'changeOrder']);
+        Route::post('change-order', [StepController::class, 'changeOrder']);
     });
 
     Route::get('case-logs/{caseLog}', [CaseLogController::class, 'show']);

@@ -48,13 +48,19 @@ class StepController extends Controller
 
     public function changeOrder(UpdateStepOrderRequest $request, Step $step): StepResource
     {
-        Step::where('project_case_id', $step->project_case_id)
-            ->where('order_no', '=', $request->order_no)
-            ->update(['order_no' => $step->order_no]);
+        if ($request->order_no < $step->order_no) {
+            Step::where('project_case_id', $step->project_case_id)
+                ->where('order_no', '>=', $request->order_no)
+                ->where('order_no', '<', $step->order_no)
+                ->increment('order_no');
+        } else {
+            Step::where('project_case_id', $step->project_case_id)
+                ->where('order_no', '>', $step->order_no)
+                ->where('order_no', '<=', $request->order_no)
+                ->decrement('order_no');
+        }
 
-        $step->update([
-            'order_no' => $request->order_no,
-        ]);
+        $step->update(['order_no' => $request->order_no]);
 
         return StepResource::make($step);
     }
