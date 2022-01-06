@@ -39,4 +39,4 @@ jobs:
     - name: Parallel lint
       run: ./vendor/bin/parallel-lint --exclude vendor .
     - name: phpstan Analyse
-      run: ./vendor/phpstan/phpstan/phpstan analyse
+      run: ./vendor/phpstan/phpstan analyse --level 0 app
