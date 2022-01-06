@@ -1,14 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ProjectCaseController;
-use App\Http\Controllers\StepController;
-use App\Http\Controllers\EnvironmentController;
-use App\Http\Controllers\CaseLogController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CaseLogController;
+use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\ProjectCaseController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\StepController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ Route::prefix('auth')->group(function () {
 
 Route::group([
     'middleware' => 'auth:api',
-    'prefix' => 'auth'
+    'prefix' => 'auth',
 ], function () {
     Route::get('me', [AuthController::class, 'me']);
     Route::post('logout', [AuthController::class, 'logout']);

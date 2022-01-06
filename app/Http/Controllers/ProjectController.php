@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\HttpMethod;
-use App\Enums\ProjectBackgroundColor;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
@@ -40,7 +38,7 @@ class ProjectController extends Controller
             'cases' => function ($query) {
                 $query->orderBy('order_no')->withCount('steps');
             },
-            'cases.latestLog'
+            'cases.latestLog',
         ]);
 
         $project->loadCount('cases');
