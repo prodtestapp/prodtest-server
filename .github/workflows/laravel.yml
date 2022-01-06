@@ -28,4 +28,15 @@ jobs:
       run: php artisan route:cache
     - name: php-cs-fixer
       run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
-
+    - name: var_dump checker for app folder
+      run: ./vendor/bin/var-dump-check --no-colors --tracy --symfony --laravel app/
+    - name: var_dump checker for database folder
+      run: ./vendor/bin/var-dump-check --no-colors --tracy --symfony --laravel database/
+    - name: var_dump checker for resources folder
+      run: ./vendor/bin/var-dump-check --no-colors --tracy --symfony --laravel resources/
+    - name: var_dump checker for tests folder
+      run: ./vendor/bin/var-dump-check --no-colors --tracy --symfony --laravel tests/
+    - name: Parallel lint
+      run: ./vendor/bin/parallel-lint --exclude vendor .
+    - name: phpstan Analyse
+      run: ./vendor/phpstan/phpstan/phpstan analyse
