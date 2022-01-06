@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Project;
 use App\Models\Step;
+use App\Observers\ProjectObserver;
 use App\Observers\StepObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -23,8 +25,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Step::observe(StepObserver::class);
+        Project::observe(ProjectObserver::class);
     }
 }

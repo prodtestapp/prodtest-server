@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\HttpMethod;
 use App\Enums\ProjectBackgroundColor;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
@@ -21,14 +22,7 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request): ProjectResource
     {
-        $project = Project::create(
-            array_merge(
-                $request->validated(),
-                [
-                    'background_color' => ProjectBackgroundColor::getValues()[rand(0, ProjectBackgroundColor::getValuesCount() - 1)],
-                ]
-            )
-        );
+        $project = Project::create($request->validated());
 
         $project->environments()->create([
             'name' => 'Default',
