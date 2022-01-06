@@ -27,5 +27,5 @@ jobs:
     - name: Route Cache
       run: php artisan route:cache
     - name: php-cs-fixer
-      run: ~/vendor/bin/php-cs-fixer fix --dry-run --diff
+      run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
 
