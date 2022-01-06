@@ -26,8 +26,6 @@ jobs:
       run: php artisan config:clear
     - name: Route Cache
       run: php artisan route:cache
-    - name: Migration fresh
-      run: php artisan migrate:fresh
     - name: php-cs-fixer
       run: ~/vendor/bin/php-cs-fixer fix --dry-run --diff
 
